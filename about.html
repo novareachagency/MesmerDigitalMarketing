@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Mesmer Digital Marketing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== GLOBAL RESET & THEME ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2c3e50 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION (from your existing styles) ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 62, 80, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ===== LOADING SCREEN ===== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a2a6c 0%, #2c3e50 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        .circular-loader {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+        }
+        .circular-progress {
+            width: 120px;
+            height: 120px;
+            transform: rotate(-90deg);
+        }
+        .progress-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.1);
+            stroke-width: 8;
+        }
+        .progress-fill {
+            fill: none;
+            stroke: #3498db;
+            stroke-width: 8;
+            stroke-linecap: round;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 0.3s ease;
+        }
+        .loading-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        .loading-text {
+            color: white;
+            margin-top: 1rem;
+        }
+
+        /* ===== ABOUT PAGE ===== */
+        .about-page {
+            padding: 10rem 2rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Animated Image with Border Glow */
+        .image-animation {
+            margin: 2rem auto 3rem;
+        }
+
+        .animated-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+            /* Animated glowing border */
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.4);
+            animation: float 4s ease-in-out infinite, borderGlow 3s ease-in-out infinite alternate;
+            transition: transform 0.4s ease;
+        }
+
+        @keyframes borderGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(52, 152, 219, 0.4);
+            }
+            100% {
+                box-shadow: 0 0 30px rgba(52, 152, 219, 0.8), 0 0 60px rgba(52, 152, 219, 0.3);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(3deg);
+            }
+        }
+
+        /* Text Animation */
+        .animate-text {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 1.5rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: textFadeIn 1s forwards;
+        }
+
+        @keyframes textFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Content Paragraphs */
+        .about-content {
+            line-height: 1.8;
+            text-align: left;
+            padding: 0 1rem;
+            margin-top: 1rem;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .about-content p:nth-child(1) { animation: contentSlide 0.6s 0.4s forwards; }
+        .about-content p:nth-child(2) { animation: contentSlide 0.6s 0.6s forwards; }
+        .about-content p:nth-child(3) { animation: contentSlide 0.6s 0.8s forwards; }
+        .about-content p:nth-child(4) { animation: contentSlide 0.6s 1.0s forwards; }
+
+        @keyframes contentSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover Effect */
+        .animated-image:hover {
+            animation: none;
+            transform: scale(1.1) rotate(8deg);
+            box-shadow: 0 0 40px rgba(52, 152, 219, 0.9), 0 0 70px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-page { padding: 8rem 1rem 4rem; }
+            .animated-image { width: 150px; height: 150px; }
+            .animate-text { font-size: 2.2rem; }
+            .nav-menu { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-container">
+            <div class="circular-loader">
+                <svg class="circular-progress" viewBox="0 0 100 100">
+                    <circle class="progress-bg" cx="50" cy="50" r="45" />
+                    <circle class="progress-fill" cx="50" cy="50" r="45" />
+                </svg>
+                <div class="loading-number" id="loadingNumber">0%</div>
+            </div>
+            <p class="loading-text">Loading Mesmer Digital...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <h2 class="logo">Mesmer Digital</h2>
+            <ul class="nav-menu">
+                <li><a href="mesmerdigitalmarketing.html" class="nav-link">Home</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="portfolio.html" class="nav-link">Portfolio</a></li>
+                <li><a href="about.html" class="nav-link active">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- About Section -->
+    <section class="about-page">
+        <div class="about-container">
+            <div class="image-animation">
+                <img src="img/logo.png" alt="Mesmer Digital Logo" class="animated-image">
+            </div>
+            <h1 class="animate-text">About Mesmer Digital</h1>
+            <div class="about-content">
+                <p>At Mesmer Digital Marketing we create powerful visuals and digital experiences that make every moment unforgettable.</p>
+                <p>We specialize in event videography, photography, cinematic editing, and social media content creation for all types of special events — from weddings and birthdays to corporate functions and graduations.</p>
+                <p>Our team also provides professional video editing, promotional business videos, short highlight reels, YouTube content creation, and full digital marketing support.</p>
+                <p>Whether you're building your brand or capturing life's biggest moments, we deliver high-quality, creative, and impactful results.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const progressFill = document.querySelector('.progress-fill');
+            const loadingNumber = document.getElementById('loadingNumber');
+            const circumference = 283;
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 12;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    loadingNumber.textContent = '100%';
+                    progressFill.style.strokeDashoffset = circumference - (progress / 100) * circumference;
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 500);
+                    }, 300);
+                } else {
+                    loadingNumber.textContent = Math.round(progress) + '%';
+                    progressFill.style.strokeDashoffset = circumference - (progress / 100) * circumference;
+                }
+            }, 120);
+        });
+    </script>
+</body>
+</html>

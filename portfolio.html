@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Portfolio - Digital Marketing Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-container">
+        <div class="circular-loader">
+            <svg class="circular-progress" viewBox="0 0 100 100">
+                <circle class="progress-bg" cx="50" cy="50" r="45" />
+                <circle class="progress-fill" cx="50" cy="50" r="45" />
+            </svg>
+            <div class="loading-number" id="loadingNumber">0%</div>
+        </div>
+        <p class="loading-text">Loading Mesmer Digital...</p>
+    </div>
+</div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h2 class="logo">MarketerPro</h2>
+            <ul class="nav-menu">
+                <li><a href="mesmerdigitalmarketing.html" class="nav-link">Home</a></li>
+                <li><a href="services.html" class="nav-link">Services</a></li>
+                <li><a href="portfolio.html" class="nav-link active">Portfolio</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="portfolio-page">
+        <h1>Our Success Stories</h1>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <h3>E-commerce Growth</h3>
+                <p>Increased traffic by 200% in 6 months</p>
+            </div>
+            <div class="portfolio-item">
+                <h3>Social Media Campaign</h3>
+                <p>Generated 50K new followers and 25% engagement</p>
+            </div>
+            <div class="portfolio-item">
+                <h3>SEO Optimization</h3>
+                <p>Ranked #1 for 15+ keywords</p>
+            </div>
+            <div class="portfolio-item">
+                <h3>PPC Campaign</h3>
+                <p>300% ROI improvement</p>
+            </div>
+        </div>
+        <script>
+// Circular loading animation with number counter
+document.addEventListener('DOMContentLoaded', function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const progressFill = document.querySelector('.progress-fill');
+    const loadingNumber = document.getElementById('loadingNumber');
+    
+    let progress = 0;
+    const circumference = 283; // 2 * π * 45
+    
+    const interval = setInterval(() => {
+        progress += Math.random() * 15; // Faster loading
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+            
+            // Update final state
+            const offset = circumference - (progress / 100) * circumference;
+            progressFill.style.strokeDashoffset = offset;
+            loadingNumber.textContent = Math.round(progress) + '%';
+            
+            // Fade out loading screen and show content
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 300);
+        } else {
+            const offset = circumference - (progress / 100) * circumference;
+            progressFill.style.strokeDashoffset = offset;
+            loadingNumber.textContent = Math.round(progress) + '%';
+        }
+    }, 150);
+});
+</script>
+    </section>
+
+
+</body>
+</html>
